@@ -42,7 +42,7 @@ const Login: React.FC = () => {
         login(token, user);
         setNome("");
         setSenha("");
-        navigate("/adm");
+        navigate("/TelaInicial");
       } else {
         console.log("Erro ao Logar:", response.data);
       }

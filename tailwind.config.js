@@ -1,20 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      backgroundImage: {
-        'visionai': "url('./images/visiona.jpg')",
-        'visionai2': "url('./images/visiona2.jpg')",
-      },
       colors: {
-        'visiona': '#fe5000',
+        "custom-bg": "rgba(16, 30, 30,1)",
       },
     },
   },
   plugins: [],
-}
-
+};
