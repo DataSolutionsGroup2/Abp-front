@@ -1,8 +1,8 @@
-import Animação from "../../components/Animação";
-import aguaJson from "../../assets/animacoes/agua.json";
-import passoJson from "../../assets/animacoes/passo.json";
-import caloriasJson from "../../assets/animacoes/calorias.json";
-import tempoativoJson from "../../assets/animacoes/tempoativo.json";
+import Animação from "../components/Animação";
+import aguaJson from "../assets/animacoes/agua.json";
+import passoJson from "../assets/animacoes/passo.json";
+import caloriasJson from "../assets/animacoes/calorias.json";
+import tempoativoJson from "../assets/animacoes/tempoativo.json";
 
 export default function TelaInicial() {
   return (

@@ -2,14 +2,20 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context.tsx/AuthContext";
 import api from "../../services/api";
+import RegisterModal from "./ModalRegistroUsuario";
+import ForgotPasswordModal from "./ModalRecuperarUsuario";
 
 const Login: React.FC = () => {
-  const [nome, setNome] = useState("");
+  const [email, seteEmai] = useState("");
   const [senha, setSenha] = useState("");
   const [error, setError] = useState("");
   const { login } = useAuth();
   const navigate = useNavigate();
   const passwordRef = useRef<HTMLInputElement>(null);
+
+  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+  const [isForgotPasswordModalOpen, setIsForgotPasswordModalOpen] =
+    useState(false);
 
   useEffect(() => {
     if (passwordRef.current) {
@@ -18,7 +24,7 @@ const Login: React.FC = () => {
   }, []);
 
   const handleUserChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNome(event.target.value);
+    seteEmai(event.target.value);
   };
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,10 +33,7 @@ const Login: React.FC = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await api.post("/login", {
-        nome,
-        senha,
-      });
+      const response = await api.post("/login", { email, senha });
 
       if (response.status === 200) {
         const { token, user } = response.data;
@@ -40,7 +43,7 @@ const Login: React.FC = () => {
         }
 
         login(token, user);
-        setNome("");
+        seteEmai("");
         setSenha("");
         navigate("/TelaInicial");
       } else {
@@ -71,6 +74,12 @@ const Login: React.FC = () => {
     }
   };
 
+  const openRegisterModal = () => setIsRegisterModalOpen(true);
+  const closeRegisterModal = () => setIsRegisterModalOpen(false);
+
+  const openForgotPasswordModal = () => setIsForgotPasswordModalOpen(true);
+  const closeForgotPasswordModal = () => setIsForgotPasswordModalOpen(false);
+
   return (
     <div className="select-none flex flex-col h-screen">
       <header className="bg-gradient-to-r from-green-900 to-emerald-900 py-10 text-white text-center"></header>
@@ -81,14 +90,14 @@ const Login: React.FC = () => {
               Entre com a sua conta
             </div>
             <label htmlFor="nome" className="mt-3 font-medium">
-              Nome
+              email
             </label>
             <input
               className="mb-3 mt-3 roboto rounded-lg p-2 w-full border-[#4CAF50] border hover:border hover:w-full transition-all"
               type="text"
-              id="nome"
-              placeholder="Entre com o seu usuário"
-              value={nome}
+              id="email"
+              placeholder="Entre com o seu email"
+              value={email}
               onChange={handleUserChange}
             />
             <label htmlFor="senha" className="mt-3 font-medium">
@@ -114,11 +123,33 @@ const Login: React.FC = () => {
             >
               Login
             </button>
+            <div className="flex justify-between mt-2">
+              <button
+                className="text-blue-500 underline"
+                onClick={openRegisterModal}
+              >
+                Criar Conta
+              </button>
+              <button
+                className="text-blue-500 underline"
+                onClick={openForgotPasswordModal}
+              >
+                Esqueci minha senha
+              </button>
+            </div>
           </div>
         </div>
-        <div className="hidden md:flex flex-col ml-8 gap-4 items-center"></div>
       </div>
       <footer className="bg-gradient-to-r from-green-900 to-emerald-900 py-10"></footer>
+
+      <RegisterModal
+        isOpen={isRegisterModalOpen}
+        onRequestClose={closeRegisterModal}
+      />
+      <ForgotPasswordModal
+        isOpen={isForgotPasswordModalOpen}
+        onRequestClose={closeForgotPasswordModal}
+      />
     </div>
   );
 };

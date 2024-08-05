@@ -3,7 +3,7 @@ import Login from "./pages/LoginPage/LoginPage";
 import { AuthProvider } from "./context.tsx/AuthContext";
 import { UserProvider } from "./context.tsx/UserContext";
 import ProtectedRoute from "./route/RouterProtect";
-import TelaInicial from "./pages/LoginPage/TelaInicial";
+import TelaInicial from "./pages/TelaInicial";
 
 function Rotas() {
   return (
