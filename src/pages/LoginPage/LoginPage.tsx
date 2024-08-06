@@ -4,9 +4,10 @@ import { useAuth } from "../../context.tsx/AuthContext";
 import api from "../../services/api";
 import RegisterModal from "./ModalRegistroUsuario";
 import ForgotPasswordModal from "./ModalRecuperarUsuario";
+import ResetPasswordModal from "./ModalDeNovaSenha";
 
 const Login: React.FC = () => {
-  const [email, seteEmai] = useState("");
+  const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [error, setError] = useState("");
   const { login } = useAuth();
@@ -16,6 +17,9 @@ const Login: React.FC = () => {
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [isForgotPasswordModalOpen, setIsForgotPasswordModalOpen] =
     useState(false);
+  const [isResetPasswordModalOpen, setIsResetPasswordModalOpen] =
+    useState(false);
+  const [resetEmail, setResetEmail] = useState("");
 
   useEffect(() => {
     if (passwordRef.current) {
@@ -24,7 +28,7 @@ const Login: React.FC = () => {
   }, []);
 
   const handleUserChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    seteEmai(event.target.value);
+    setEmail(event.target.value);
   };
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,7 +47,7 @@ const Login: React.FC = () => {
         }
 
         login(token, user);
-        seteEmai("");
+        setEmail("");
         setSenha("");
         navigate("/TelaInicial");
       } else {
@@ -79,6 +83,17 @@ const Login: React.FC = () => {
 
   const openForgotPasswordModal = () => setIsForgotPasswordModalOpen(true);
   const closeForgotPasswordModal = () => setIsForgotPasswordModalOpen(false);
+
+  const openResetPasswordModal = (email: string) => {
+    setResetEmail(email); // Armazena o email recebido
+    setIsResetPasswordModalOpen(true);
+  };
+  const closeResetPasswordModal = () => setIsResetPasswordModalOpen(false);
+
+  const handleForgotPasswordSuccess = (email: string) => {
+    closeForgotPasswordModal();
+    openResetPasswordModal(email); // Passe o email
+  };
 
   return (
     <div className="select-none flex flex-col h-screen">
@@ -149,6 +164,12 @@ const Login: React.FC = () => {
       <ForgotPasswordModal
         isOpen={isForgotPasswordModalOpen}
         onRequestClose={closeForgotPasswordModal}
+        onSuccess={handleForgotPasswordSuccess}
+      />
+      <ResetPasswordModal
+        isOpen={isResetPasswordModalOpen}
+        onRequestClose={closeResetPasswordModal}
+        email={resetEmail}
       />
     </div>
   );

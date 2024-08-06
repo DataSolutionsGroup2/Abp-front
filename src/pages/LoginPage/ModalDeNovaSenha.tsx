@@ -2,23 +2,30 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import api from "../../services/api";
 
-interface ForgotPasswordModalProps {
+interface ResetPasswordModalProps {
   isOpen: boolean;
   onRequestClose: () => void;
-  onSuccess: (email: string) => void; // Notificar com o email
+  email: string;
 }
 
-const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({
+const ResetPasswordModal: React.FC<ResetPasswordModalProps> = ({
   isOpen,
   onRequestClose,
-  onSuccess, // Receba a prop onSuccess
+  email,
 }) => {
-  const [email, setEmail] = useState("");
+  const [recoveryCode, setCode] = useState("");
+  const [newPassword, setNewPassword] = useState("");
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value);
+  const handleCodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setCode(event.target.value);
+  };
+
+  const handleNewPasswordChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setNewPassword(event.target.value);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -27,17 +34,20 @@ const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({
     setSuccessMessage("");
 
     try {
-      const response = await api.post("/reset", { email });
+      const response = await api.post("/recuperacao-senha", {
+        email,
+        recoveryCode,
+        newPassword,
+      });
 
       if (response.status === 200) {
         setSuccessMessage(response.data.message);
-        onSuccess(email); // Notifique com o email
       }
     } catch (error: any) {
       if (error.response) {
-        setError(error.response.data.error || "Erro ao recuperar senha");
+        setError(error.response.data.error || "Erro ao redefinir senha");
       } else {
-        setError("Erro ao recuperar senha");
+        setError("Erro ao redefinir senha");
       }
     }
   };
@@ -50,16 +60,27 @@ const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({
       overlayClassName="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50"
     >
       <div>
-        <h2 className="text-center text-2xl font-bold mb-4">Recuperar Senha</h2>
+        <h2 className="text-center text-2xl font-bold mb-4">Redefinir Senha</h2>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="forgot-email" className="block mb-2">
-            Email:
+          <label htmlFor="reset-code" className="block mb-2">
+            Código de Recuperação:
           </label>
           <input
-            type="email"
-            id="forgot-email"
-            value={email}
-            onChange={handleEmailChange}
+            type="text"
+            id="reset-code"
+            value={recoveryCode}
+            onChange={handleCodeChange}
+            className="w-full p-2 border mb-3 rounded"
+            required
+          />
+          <label htmlFor="new-password" className="block mb-2">
+            Nova Senha:
+          </label>
+          <input
+            type="password"
+            id="new-password"
+            value={newPassword}
+            onChange={handleNewPasswordChange}
             className="w-full p-2 border mb-3 rounded"
             required
           />
@@ -71,7 +92,7 @@ const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({
             type="submit"
             className="w-full bg-blue-500 text-white p-2 rounded mt-4"
           >
-            Enviar Email de Recuperação
+            Redefinir Senha
           </button>
         </form>
         <button className="mt-4 text-red-500" onClick={onRequestClose}>
@@ -82,4 +103,4 @@ const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({
   );
 };
 
-export default ForgotPasswordModal;
+export default ResetPasswordModal;
