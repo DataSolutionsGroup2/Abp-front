@@ -56,13 +56,13 @@ const ResetPasswordModal: React.FC<ResetPasswordModalProps> = ({
     <Modal
       isOpen={isOpen}
       onRequestClose={onRequestClose}
-      className="relative bg-white rounded-lg w-full max-w-md p-6 mx-4 overflow-y-auto max-h-[90%] outline-none"
+      className="relative bg-white opacity-90 rounded-full w-full max-w-md p-20 mx-6 overflow-y-auto max-h-[100%] outline-none"
       overlayClassName="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50"
     >
-      <div>
+      <div className="flex flex-col items-center">
         <h2 className="text-center text-2xl font-bold mb-4">Redefinir Senha</h2>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="reset-code" className="block mb-2">
+        <form onSubmit={handleSubmit} className="w-full">
+          <label htmlFor="reset-code" className="block mb-2 text-center">
             Código de Recuperação:
           </label>
           <input
@@ -70,10 +70,10 @@ const ResetPasswordModal: React.FC<ResetPasswordModalProps> = ({
             id="reset-code"
             value={recoveryCode}
             onChange={handleCodeChange}
-            className="w-full p-2 border mb-3 rounded"
+            className="w-full p-2 border mb-3 rounded text-center"
             required
           />
-          <label htmlFor="new-password" className="block mb-2">
+          <label htmlFor="new-password" className="block mb-2 text-center">
             Nova Senha:
           </label>
           <input
@@ -81,16 +81,20 @@ const ResetPasswordModal: React.FC<ResetPasswordModalProps> = ({
             id="new-password"
             value={newPassword}
             onChange={handleNewPasswordChange}
-            className="w-full p-2 border mb-3 rounded"
+            className="w-full p-2 border mb-3 rounded text-center"
             required
           />
-          {error && <div className="text-red-500 mb-2">{error}</div>}
+          {error && (
+            <div className="text-red-500 mb-2 text-center">{error}</div>
+          )}
           {successMessage && (
-            <div className="text-green-500 mb-2">{successMessage}</div>
+            <div className="text-green-500 mb-2 text-center">
+              {successMessage}
+            </div>
           )}
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white p-2 rounded mt-4"
+            className="w-full bg-gradient-to-r from-teal-400 to-cyan-600 hover:from-teal-500 hover:to-cyan-700 text-white font-bold py-2 px-2 rounded-lg mb-2"
           >
             Redefinir Senha
           </button>

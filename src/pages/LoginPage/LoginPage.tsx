@@ -85,42 +85,38 @@ const Login: React.FC = () => {
   const closeForgotPasswordModal = () => setIsForgotPasswordModalOpen(false);
 
   const openResetPasswordModal = (email: string) => {
-    setResetEmail(email); // Armazena o email recebido
+    setResetEmail(email);
     setIsResetPasswordModalOpen(true);
   };
   const closeResetPasswordModal = () => setIsResetPasswordModalOpen(false);
 
   const handleForgotPasswordSuccess = (email: string) => {
     closeForgotPasswordModal();
-    openResetPasswordModal(email); // Passe o email
+    openResetPasswordModal(email);
   };
 
   return (
-    <div className="select-none flex flex-col h-screen">
-      <header className="bg-gradient-to-r from-green-900 to-emerald-900 py-10 text-white text-center"></header>
-      <div className="flex justify-center items-center flex-grow px-4 md:px-0">
+    <div
+      className="relative select-none flex flex-col h-screen bg-cover bg-center"
+      style={{
+        backgroundImage: "url('/src/assets/imagens/teste.jpeg')",
+      }}
+    >
+      <div className="absolute inset-0 flex justify-center items-center">
         <div className="flex flex-col items-center w-full max-w-md">
-          <div className="rounded-lg border text-green-900 bg-white w-full p-7 mb-3 shadow-2xl">
-            <div className="text-center mb-5 font-medium text-lg">
-              Entre com a sua conta
-            </div>
-            <label htmlFor="nome" className="mt-3 font-medium">
-              email
-            </label>
+          <div className="rounded-full bg-white bg-opacity-40 w-96 h-96 flex flex-col items-center justify-center p-10 mb-2">
             <input
-              className="mb-3 mt-3 roboto rounded-lg p-2 w-full border-[#4CAF50] border hover:border hover:w-full transition-all"
+              className="mb-1  mt-3 roboto rounded-lg p-2 w-full border-[#9e9e9e] border hover:border hover:w-full transition-all text-center"
               type="text"
               id="email"
               placeholder="Entre com o seu email"
               value={email}
               onChange={handleUserChange}
             />
-            <label htmlFor="senha" className="mt-3 font-medium">
-              Senha
-            </label>
+
             <input
               ref={passwordRef}
-              className="mb-3 mt-3 rounded-lg p-2 w-full border-[#4CAF50] border hover:border hover:w-full transition-all"
+              className="mb-3 mt-3 rounded-lg p-2 w-full border-[#9e9e9e] border hover:border hover:w-full transition-all text-center"
               type="password"
               id="senha"
               placeholder="Entre com a sua senha"
@@ -133,20 +129,20 @@ const Login: React.FC = () => {
               <div className="text-[#4CAF50] font-bold mt-2">{error}</div>
             )}
             <button
-              className="w-full bg-gradient-to-r from-green-500 to-emerald-900 hover:from-green-600 hover:to-emerald-500 text-white font-bold py-2 px-4 rounded-lg mb-2"
+              className="w-full bg-gradient-to-r from-teal-400 to-cyan-600 hover:from-teal-500 hover:to-cyan-700 text-white font-bold py-2 px-2 rounded-lg mb-2"
               onClick={handleLogin}
             >
               Login
             </button>
-            <div className="flex justify-between mt-2">
+            <div className="flex justify-between w-full mt-4">
               <button
-                className="text-blue-500 underline"
+                className=" rounded-lg px-2 bg-gradient-to-r from-teal-400 to-cyan-600 hover:from-teal-500 hover:to-cyan-700 text-white"
                 onClick={openRegisterModal}
               >
-                Criar Conta
+                Criar conta
               </button>
               <button
-                className="text-blue-500 underline"
+                className="rounded-lg px-2 bg-gradient-to-r from-teal-400 to-cyan-600 hover:from-teal-500 hover:to-cyan-700 text-white"
                 onClick={openForgotPasswordModal}
               >
                 Esqueci minha senha
@@ -155,7 +151,6 @@ const Login: React.FC = () => {
           </div>
         </div>
       </div>
-      <footer className="bg-gradient-to-r from-green-900 to-emerald-900 py-10"></footer>
 
       <RegisterModal
         isOpen={isRegisterModalOpen}
