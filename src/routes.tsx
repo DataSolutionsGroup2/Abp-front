@@ -11,8 +11,9 @@ function Rotas() {
       <UserProvider>
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route element={<ProtectedRoute />}></Route>
-          <Route path="/TelaInicial" element={<TelaInicial />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/TelaInicial" element={<TelaInicial />} />
+          </Route>
         </Routes>
       </UserProvider>
     </AuthProvider>
