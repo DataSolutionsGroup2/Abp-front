@@ -99,7 +99,7 @@ const Login: React.FC = () => {
     <div
       className="relative select-none flex flex-col h-screen bg-cover bg-center"
       style={{
-        backgroundImage: "url('/src/assets/imagens/teste.jpeg')",
+        backgroundImage: "url('/src/assets/imagens/imagemTelaLogin.jpeg')",
       }}
     >
       <div className="absolute inset-0 flex justify-center items-center">
