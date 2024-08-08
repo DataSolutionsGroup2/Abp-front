@@ -1,3 +1,4 @@
+// src/pages/TelaInicial.tsx
 import Animação from "../components/Animação";
 import aguaJson from "../assets/animacoes/agua.json";
 import passoJson from "../assets/animacoes/passo.json";
@@ -39,71 +40,71 @@ export default function TelaInicial() {
                     : "Passos"}
                 </h2>
                 {index === 0 && (
-                  <div className="mt-4 flex space-x-3">
+                  <div className="mt-4 flex flex-wrap justify-center gap-2 sm:gap-3">
                     <button
                       id="calorias-menos"
-                      className="w-12 h-12 bg-gradient-to-r from-[#979996] to-[#000000] rounded-full flex items-center justify-center text-white hover:bg-gradient-to-r hover:from-[#000000] hover:to-[#979996] transition-colors"
+                      className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-[#979996] to-[#000000] rounded-full flex items-center justify-center text-white hover:bg-gradient-to-r hover:from-[#000000] hover:to-[#979996] transition-colors"
                     >
                       <img
                         src="/src/assets/imagens/menos.svg"
                         alt="Button Icon 1"
-                        className="w-8 h-8"
+                        className="w-6 h-6 sm:w-8 sm:h-8"
                       />
                     </button>
                     <button
                       id="calorias mais"
-                      className="w-12 h-12 bg-gradient-to-r from-[#979996] to-[#000000] rounded-full flex items-center justify-center text-white hover:bg-gradient-to-r hover:from-[#000000] hover:to-[#979996] transition-colors"
+                      className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-[#979996] to-[#000000] rounded-full flex items-center justify-center text-white hover:bg-gradient-to-r hover:from-[#000000] hover:to-[#979996] transition-colors"
                     >
                       <img
                         src="/src/assets/imagens/mais.svg"
                         alt="Button Icon 1"
-                        className="w-8 h-8"
+                        className="w-6 h-6 sm:w-8 sm:h-8"
                       />
                     </button>
                     <button
                       id="calorias-escolha"
-                      className="w-12 h-12 bg-gradient-to-r from-[#979996] to-[#000000] rounded-full flex items-center justify-center text-white hover:bg-gradient-to-r hover:from-[#000000] hover:to-[#979996] transition-colors"
+                      className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-[#979996] to-[#000000] rounded-full flex items-center justify-center text-white hover:bg-gradient-to-r hover:from-[#000000] hover:to-[#979996] transition-colors"
                     >
                       <img
                         src="/src/assets/imagens/escolha.svg"
                         alt="Button Icon 2"
-                        className="w-8 h-8"
+                        className="w-6 h-6 sm:w-8 sm:h-8"
                       />
                     </button>
                   </div>
                 )}
                 {index === 2 && (
-                  <div className="mt-4 flex space-x-3">
+                  <div className="mt-4 flex flex-wrap justify-center gap-2 sm:gap-3">
                     <button
                       id="agua-menos"
-                      className="w-12 h-12 bg-gradient-to-r from-[#979996] to-[#000000] rounded-full flex items-center justify-center text-white hover:bg-gradient-to-r hover:from-[#000000] hover:to-[#979996] transition-colors"
+                      className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-[#979996] to-[#000000] rounded-full flex items-center justify-center text-white hover:bg-gradient-to-r hover:from-[#000000] hover:to-[#979996] transition-colors"
                     >
                       <img
                         src="/src/assets/imagens/menos.svg"
                         alt="Button Icon 1"
-                        className="w-8 h-8"
+                        className="w-6 h-6 sm:w-8 sm:h-8"
                       />
                     </button>
                     <button
                       id="agua-mais"
-                      className="w-12 h-12 bg-gradient-to-r from-[#979996] to-[#000000] rounded-full flex items-center justify-center text-white hover:bg-gradient-to-r hover:from-[#000000] hover:to-[#979996] transition-colors"
+                      className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-[#979996] to-[#000000] rounded-full flex items-center justify-center text-white hover:bg-gradient-to-r hover:from-[#000000] hover:to-[#979996] transition-colors"
                     >
                       <img
                         src="/src/assets/imagens/mais.svg"
                         alt="Button Icon 1"
-                        className="w-8 h-8"
+                        className="w-6 h-6 sm:w-8 sm:h-8"
                       />
                     </button>
 
                     <button
                       id="agua-escolha"
-                      className="w-12 h-12 bg-gradient-to-r from-[#979996] to-[#000000] rounded-full flex items-center justify-center text-white hover:bg-gradient-to-r hover:from-[#000000] hover:to-[#979996] transition-colors"
+                      className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-[#979996] to-[#000000] rounded-full flex items-center justify-center text-white hover:bg-gradient-to-r hover:from-[#000000] hover:to-[#979996] transition-colors"
                       onClick={() => setShowModal(true)}
                     >
                       <img
                         src="/src/assets/imagens/escolha.svg"
                         alt="Button Icon 2"
-                        className="w-8 h-8"
+                        className="w-6 h-6 sm:w-8 sm:h-8"
                       />
                     </button>
                   </div>
