@@ -6,10 +6,12 @@ import tempoativoJson from "../assets/animacoes/tempoativo.json";
 import NavigationButtons from "../components/BotãoMenu";
 import { useState } from "react";
 import Calendario from "../components/Calendario";
+import ModalEscolha from "../components/ModalFuncionalidades/ModalAgua";
 
 export default function TelaInicial() {
   const [tempoAtivo, setTempoAtivo] = useState("");
   const [passos, setPassos] = useState("");
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <div className="flex flex-col min-h-screen bg-custom-bg px-6">
@@ -37,15 +39,31 @@ export default function TelaInicial() {
                     : "Passos"}
                 </h2>
                 {index === 0 && (
-                  <div className="mt-4 flex space-x-4">
-                    <button className="w-12 h-12 bg-gradient-to-r from-[#979996] to-[#000000] rounded-full flex items-center justify-center text-white hover:bg-gradient-to-r hover:from-[#000000] hover:to-[#979996] transition-colors">
+                  <div className="mt-4 flex space-x-3">
+                    <button
+                      id="calorias-menos"
+                      className="w-12 h-12 bg-gradient-to-r from-[#979996] to-[#000000] rounded-full flex items-center justify-center text-white hover:bg-gradient-to-r hover:from-[#000000] hover:to-[#979996] transition-colors"
+                    >
+                      <img
+                        src="/src/assets/imagens/menos.svg"
+                        alt="Button Icon 1"
+                        className="w-8 h-8"
+                      />
+                    </button>
+                    <button
+                      id="calorias mais"
+                      className="w-12 h-12 bg-gradient-to-r from-[#979996] to-[#000000] rounded-full flex items-center justify-center text-white hover:bg-gradient-to-r hover:from-[#000000] hover:to-[#979996] transition-colors"
+                    >
                       <img
                         src="/src/assets/imagens/mais.svg"
                         alt="Button Icon 1"
                         className="w-8 h-8"
                       />
                     </button>
-                    <button className="w-12 h-12 bg-gradient-to-r from-[#979996] to-[#000000] rounded-full flex items-center justify-center text-white hover:bg-gradient-to-r hover:from-[#000000] hover:to-[#979996] transition-colors">
+                    <button
+                      id="calorias-escolha"
+                      className="w-12 h-12 bg-gradient-to-r from-[#979996] to-[#000000] rounded-full flex items-center justify-center text-white hover:bg-gradient-to-r hover:from-[#000000] hover:to-[#979996] transition-colors"
+                    >
                       <img
                         src="/src/assets/imagens/escolha.svg"
                         alt="Button Icon 2"
@@ -55,15 +73,33 @@ export default function TelaInicial() {
                   </div>
                 )}
                 {index === 2 && (
-                  <div className="mt-4 flex space-x-4">
-                    <button className="w-12 h-12 bg-gradient-to-r from-[#979996] to-[#000000] rounded-full flex items-center justify-center text-white hover:bg-gradient-to-r hover:from-[#000000] hover:to-[#979996] transition-colors">
+                  <div className="mt-4 flex space-x-3">
+                    <button
+                      id="agua-menos"
+                      className="w-12 h-12 bg-gradient-to-r from-[#979996] to-[#000000] rounded-full flex items-center justify-center text-white hover:bg-gradient-to-r hover:from-[#000000] hover:to-[#979996] transition-colors"
+                    >
+                      <img
+                        src="/src/assets/imagens/menos.svg"
+                        alt="Button Icon 1"
+                        className="w-8 h-8"
+                      />
+                    </button>
+                    <button
+                      id="agua-mais"
+                      className="w-12 h-12 bg-gradient-to-r from-[#979996] to-[#000000] rounded-full flex items-center justify-center text-white hover:bg-gradient-to-r hover:from-[#000000] hover:to-[#979996] transition-colors"
+                    >
                       <img
                         src="/src/assets/imagens/mais.svg"
                         alt="Button Icon 1"
                         className="w-8 h-8"
                       />
                     </button>
-                    <button className="w-12 h-12 bg-gradient-to-r from-[#979996] to-[#000000] rounded-full flex items-center justify-center text-white hover:bg-gradient-to-r hover:from-[#000000] hover:to-[#979996] transition-colors">
+
+                    <button
+                      id="agua-escolha"
+                      className="w-12 h-12 bg-gradient-to-r from-[#979996] to-[#000000] rounded-full flex items-center justify-center text-white hover:bg-gradient-to-r hover:from-[#000000] hover:to-[#979996] transition-colors"
+                      onClick={() => setShowModal(true)}
+                    >
                       <img
                         src="/src/assets/imagens/escolha.svg"
                         alt="Button Icon 2"
@@ -75,20 +111,22 @@ export default function TelaInicial() {
                 {index === 1 && (
                   <div className="mt-4 p-2 w-[60%] rounded-lg bg-white flex flex-col items-center">
                     <input
+                      id="tempo-ativo-input"
                       type="text"
                       value={tempoAtivo}
                       onChange={(e) => setTempoAtivo(e.target.value)}
-                      className=" p-2 border border-gray-300 rounded-lg w-full"
+                      className="p-2 border border-gray-300 rounded-lg w-full"
                     />
                   </div>
                 )}
                 {index === 3 && (
                   <div className="mt-4 p-2 w-[60%] rounded-lg bg-white flex flex-col items-center">
                     <input
+                      id="passos-input"
                       type="text"
                       value={passos}
                       onChange={(e) => setPassos(e.target.value)}
-                      className=" p-2 border border-gray-300 rounded-lg w-full"
+                      className="p-2 border border-gray-300 rounded-lg w-full"
                     />
                   </div>
                 )}
@@ -100,6 +138,7 @@ export default function TelaInicial() {
       <footer>
         <NavigationButtons />
       </footer>
+      {showModal && <ModalEscolha onClose={() => setShowModal(false)} />}{" "}
     </div>
   );
 }
