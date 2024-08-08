@@ -96,15 +96,10 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div
-      className="relative select-none flex flex-col h-screen bg-cover bg-center"
-      style={{
-        backgroundImage: "url('/src/assets/imagens/imagemTelaLogin.jpeg')",
-      }}
-    >
+    <div className="relative select-none flex flex-col h-screen bg-cover bg-center  bg-custom-bg">
       <div className="absolute inset-0 flex justify-center items-center">
         <div className="flex flex-col items-center w-full max-w-md">
-          <div className="rounded-full bg-white bg-opacity-40 w-96 h-96 flex flex-col items-center justify-center p-10 mb-2">
+          <div className="rounded-full bg-white bg-opacity-20 w-96 h-96 flex flex-col items-center justify-center p-10 mb-2">
             <input
               className="mb-1  mt-3 roboto rounded-lg p-2 w-full border-[#9e9e9e] border hover:border hover:w-full transition-all text-center"
               type="text"

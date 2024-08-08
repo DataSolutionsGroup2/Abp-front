@@ -3,68 +3,103 @@ import aguaJson from "../assets/animacoes/agua.json";
 import passoJson from "../assets/animacoes/passo.json";
 import caloriasJson from "../assets/animacoes/calorias.json";
 import tempoativoJson from "../assets/animacoes/tempoativo.json";
+import CalendarioOntem from "../components/Calendario";
+import NavigationButtons from "../components/BotãoMenu";
+import { useState } from "react";
 
 export default function TelaInicial() {
+  const [tempoAtivo, setTempoAtivo] = useState("");
+  const [passos, setPassos] = useState("");
+
   return (
-    <div className="bg-custom-bg min-h-screen ">
-      <header className="flex flex-col items-center mx-2">
-        <div className="flex justify-center w-[150px] h-[130px] my-8">
-          <img src="/src/assets/imagens/logo.svg" alt="Logo" />
-        </div>
-
-        <div className="flex flex-col space-y-5 items-center ">
-          <div className="flex flex-row space-x-5 ">
-            <div className="w-full  p-2 rounded-lg bg-gradient-to-r from-[#A0D4A8] to-[#536E57] flex items-center  ">
-              <img src="/src/assets/imagens/3traçosM.svg" alt="Três traços" />
-            </div>
-
-            <div className="w-full  p-5  rounded-lg bg-gradient-to-r from-[#A0D4A8] to-[#536E57] flex items-center justify-center">
-              <h1 className="font-bold text-white text-lg text-center mx-24 ">
-                Nome
-              </h1>
-            </div>
-          </div>
-          <div className="w-full p-2 rounded-lg bg-gradient-to-r from-[#A0D4A8] to-[#536E57] flex items-center justify-between">
-            <div className="w-12 h-12 mx-6 bg-white rounded-full flex items-center justify-center">
-              <div className="w-12 h-12 flex items-center justify-center rounded-full overflow-hidden">
-                <div className="w-12 h-12">
-                  <Animação animationData={aguaJson} />
+    <div className="flex flex-col min-h-screen bg-custom-bg px-6">
+      <header className="flex flex-col flex-grow items-center">
+        <CalendarioOntem />
+        <div className="grid grid-cols-2 gap-4 lg:gap-x-32">
+          {[caloriasJson, tempoativoJson, aguaJson, passoJson].map(
+            (animationData, index) => (
+              <div
+                key={index}
+                className="p-4 rounded-lg bg-gradient-to-r from-[#a8f748] to-[#05fa29] flex flex-col items-center w-full sm:w-40 md:w-48 lg:w-36 xl:w-40"
+              >
+                <div className="relative flex flex-col items-center justify-center w-20 h-20">
+                  <div className="absolute w-full h-full bg-white rounded-full flex items-center justify-center overflow-hidden">
+                    <Animação animationData={animationData} />
+                  </div>
                 </div>
+                <h2 className="font-bold text-black mt-2 text-center">
+                  {index === 0
+                    ? "Calorias"
+                    : index === 1
+                    ? "Tempo Ativo"
+                    : index === 2
+                    ? "Água"
+                    : "Passos"}
+                </h2>
+                {index === 0 && (
+                  <div className="mt-4 flex space-x-4">
+                    <button className="w-12 h-12 bg-gradient-to-r from-[#979996] to-[#000000] rounded-full flex items-center justify-center text-white hover:bg-gradient-to-r hover:from-[#000000] hover:to-[#979996] transition-colors">
+                      <img
+                        src="/src/assets/imagens/mais.svg"
+                        alt="Button Icon 1"
+                        className="w-8 h-8"
+                      />
+                    </button>
+                    <button className="w-12 h-12 bg-gradient-to-r from-[#979996] to-[#000000] rounded-full flex items-center justify-center text-white hover:bg-gradient-to-r hover:from-[#000000] hover:to-[#979996] transition-colors">
+                      <img
+                        src="/src/assets/imagens/escolha.svg"
+                        alt="Button Icon 2"
+                        className="w-8 h-8"
+                      />
+                    </button>
+                  </div>
+                )}
+                {index === 2 && (
+                  <div className="mt-4 flex space-x-4">
+                    <button className="w-12 h-12 bg-gradient-to-r from-[#979996] to-[#000000] rounded-full flex items-center justify-center text-white hover:bg-gradient-to-r hover:from-[#000000] hover:to-[#979996] transition-colors">
+                      <img
+                        src="/src/assets/imagens/mais.svg"
+                        alt="Button Icon 1"
+                        className="w-8 h-8"
+                      />
+                    </button>
+                    <button className="w-12 h-12 bg-gradient-to-r from-[#979996] to-[#000000] rounded-full flex items-center justify-center text-white hover:bg-gradient-to-r hover:from-[#000000] hover:to-[#979996] transition-colors">
+                      <img
+                        src="/src/assets/imagens/escolha.svg"
+                        alt="Button Icon 2"
+                        className="w-8 h-8"
+                      />
+                    </button>
+                  </div>
+                )}
+                {index === 1 && (
+                  <div className="mt-4 p-2 w-[60%] rounded-lg bg-white flex flex-col items-center">
+                    <input
+                      type="text"
+                      value={tempoAtivo}
+                      onChange={(e) => setTempoAtivo(e.target.value)}
+                      className=" p-2 border border-gray-300 rounded-lg w-full"
+                    />
+                  </div>
+                )}
+                {index === 3 && (
+                  <div className="mt-4 p-2 w-[60%] rounded-lg bg-white flex flex-col items-center">
+                    <input
+                      type="text"
+                      value={passos}
+                      onChange={(e) => setPassos(e.target.value)}
+                      className=" p-2 border border-gray-300 rounded-lg w-full"
+                    />
+                  </div>
+                )}
               </div>
-            </div>
-            <h2 className="font-bold text-white">Água</h2>
-            <div className="p-6 mx-5 px-10 rounded-lg bg-white"></div>
-          </div>
-
-          <div className="w-full p-2 rounded-lg bg-gradient-to-r from-[#A0D4A8] to-[#536E57] flex items-center justify-between">
-            <div className="w-12 h-12 mx-6 bg-white rounded-full flex items-center justify-center">
-              <div className="w-8 h-8">
-                <Animação animationData={passoJson} />
-              </div>
-            </div>
-            <h2 className="font-bold text-white">Passos</h2>
-            <div className="p-6 mx-5 px-10 rounded-lg bg-white"></div>
-          </div>
-          <div className="w-full  p-2 rounded-lg bg-gradient-to-r from-[#A0D4A8] to-[#536E57] flex items-center justify-between">
-            <div className="w-12 h-12 mx-6 bg-white rounded-full flex items-center justify-center">
-              <div className="w-10 h-10">
-                <Animação animationData={caloriasJson} />
-              </div>
-            </div>
-            <h2 className="font-bold text-white">Calorias</h2>
-            <div className="p-6 mx-5 px-10 rounded-lg bg-white"></div>
-          </div>
-          <div className="w-full  p-2 rounded-lg bg-gradient-to-r from-[#A0D4A8] to-[#536E57] flex items-center justify-between">
-            <div className="w-12 h-12 mx-6 bg-white rounded-full flex items-center justify-center">
-              <div className="w-10 h-10 ">
-                <Animação animationData={tempoativoJson} />
-              </div>
-            </div>
-            <h2 className="font-bold text-white">Tempo ativo</h2>
-            <div className="p-6 mx-5 px-10 rounded-lg bg-white"></div>
-          </div>
+            )
+          )}
         </div>
       </header>
+      <footer>
+        <NavigationButtons />
+      </footer>
     </div>
   );
 }
