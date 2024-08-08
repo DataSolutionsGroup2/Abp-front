@@ -3,9 +3,9 @@ import aguaJson from "../assets/animacoes/agua.json";
 import passoJson from "../assets/animacoes/passo.json";
 import caloriasJson from "../assets/animacoes/calorias.json";
 import tempoativoJson from "../assets/animacoes/tempoativo.json";
-import CalendarioOntem from "../components/Calendario";
 import NavigationButtons from "../components/BotãoMenu";
 import { useState } from "react";
+import Calendario from "../components/Calendario";
 
 export default function TelaInicial() {
   const [tempoAtivo, setTempoAtivo] = useState("");
@@ -14,7 +14,7 @@ export default function TelaInicial() {
   return (
     <div className="flex flex-col min-h-screen bg-custom-bg px-6">
       <header className="flex flex-col flex-grow items-center">
-        <CalendarioOntem />
+        <Calendario />
         <div className="grid grid-cols-2 gap-4 lg:gap-x-32">
           {[caloriasJson, tempoativoJson, aguaJson, passoJson].map(
             (animationData, index) => (

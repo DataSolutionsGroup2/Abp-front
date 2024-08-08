@@ -2,7 +2,7 @@ import { format, startOfWeek, addDays } from "date-fns";
 
 const diasDaSemana = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"];
 
-const CalendarioOntem = () => {
+const Calendario = () => {
   const hoje = new Date();
 
   const inicioDaSemana = startOfWeek(hoje, { weekStartsOn: 1 });
@@ -30,4 +30,4 @@ const CalendarioOntem = () => {
   );
 };
 
-export default CalendarioOntem;
+export default Calendario;
