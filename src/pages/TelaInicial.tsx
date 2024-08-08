@@ -139,6 +139,7 @@ export default function TelaInicial() {
         <NavigationButtons />
       </footer>
       {showModal && <ModalEscolha onClose={() => setShowModal(false)} />}{" "}
+      {/* Exibir o modal */}
     </div>
   );
 }

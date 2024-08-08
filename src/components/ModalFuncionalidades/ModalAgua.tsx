@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Gauge, gaugeClasses } from "@mui/x-charts/Gauge";
 
 interface ModalEscolhaProps {
   onClose: () => void;
@@ -17,11 +18,6 @@ const ModalEscolha: React.FC<ModalEscolhaProps> = ({ onClose }) => {
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
     setQuantidade(parseInt(event.target.value, 10));
-  };
-
-  const handleSave = () => {
-    console.log(`Escolha: ${escolha}, Quantidade: ${quantidade}`);
-    onClose();
   };
 
   return (
@@ -64,20 +60,28 @@ const ModalEscolha: React.FC<ModalEscolhaProps> = ({ onClose }) => {
             ))}
           </select>
         )}
-        <div className="flex space-x-4">
-          <button
-            onClick={handleSave}
-            className="w-full py-2 bg-gradient-to-r from-[#979996] to-[#000000] text-white rounded-lg hover:bg-gradient-to-r hover:from-[#000000] hover:to-[#979996] transition-colors"
-          >
-            Salvar
-          </button>
-          <button
-            onClick={onClose}
-            className="w-full py-2 bg-gradient-to-r from-[#979996] to-[#000000] text-white rounded-lg hover:bg-gradient-to-r hover:from-[#000000] hover:to-[#979996] transition-colors"
-          >
-            Fechar
-          </button>
+
+        <div className="mb-4">
+          <Gauge
+            value={quantidade ?? 0}
+            startAngle={-110}
+            endAngle={110}
+            sx={{
+              [`& .${gaugeClasses.valueText}`]: {
+                fontSize: 40,
+                transform: "translate(0px, 0px)",
+              },
+            }}
+            text={({ value, valueMax }) => `${value} / ${valueMax} ml`}
+          />
         </div>
+
+        <button
+          onClick={onClose}
+          className="w-full py-2 bg-gradient-to-r from-[#979996] to-[#000000] text-white rounded-lg hover:bg-gradient-to-r hover:from-[#000000] hover:to-[#979996] transition-colors"
+        >
+          Fechar
+        </button>
       </div>
     </div>
   );
